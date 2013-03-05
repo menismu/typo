@@ -41,6 +41,12 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+  User.create!({:login => 'publisher',
+                :password => 'bbbbbbbb',
+                :email => 'i@i.com',
+                :profile_id => 2,
+                :name => 'publisher',
+                :state => 'active'})
 end
 
 And /^I am logged into the admin panel$/ do
@@ -52,6 +58,27 @@ And /^I am logged into the admin panel$/ do
     page.should have_content('Login successful')
   else
     assert page.has_content?('Login successful')
+  end
+end
+
+And /^I am logged into the admin panel as Publisher$/ do
+  visit '/accounts/login'
+  fill_in 'user_login', :with => 'publisher'
+  fill_in 'user_password', :with => 'bbbbbbbb'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
+end
+
+Given /^I logout from the admin panel$/ do
+  visit '/accounts/logout'
+  if page.respond_to? :should
+    page.should have_content('Successfully logged out')
+  else
+    assert page.has_content?('Successfully logged out')
   end
 end
 

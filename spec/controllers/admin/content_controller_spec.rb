@@ -544,6 +544,33 @@ describe Admin::ContentController do
         Article.should_not be_exists({:id => draft.id})
         Article.should_not be_exists({:id => draft_2.id})
       end
+
+      it "Should merge articles as Admin" do
+        #currentuser = Factory(:user, :profile => Factory(:profile_admin, :label => Profile::ADMIN))
+        other_article = Factory(:article)
+        merge_article = Factory(:article)
+
+        User.stub(:find_by_id) { @user }
+        Article.stub(:find) { @article }
+        Article.stub(:merge_with) { merge_article }
+
+        get :merge_article, 'main_article_id' => @article.id, 'merge_with' => other_article.id
+
+        response.should redirect_to(:action => 'index')
+        flash[:notice].should match 'Articles merged successfully'
+      end
+
+      it "Should not merge articles as Editor" do
+        currentuser = Factory(:user, :text_filter => Factory(:markdown), :profile => Factory(:profile_publisher))
+        other_article = Factory(:article)
+
+        User.stub(:find_by_id) { currentuser }
+
+        get :merge_article, 'main_article_id' => @article.id, 'merge_with' => other_article.id
+
+        response.should redirect_to(:action => 'index')
+        flash[:error].should match 'Error'
+      end
     end
 
     describe 'resource_add action' do

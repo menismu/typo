@@ -416,6 +416,26 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+  def merge_with(other_article_id)
+    other_article = Article.find_by_id(other_article_id)
+
+    if other_article.nil?
+      return nil
+    end
+
+    new_article = self.dup
+    new_article.body += other_article.body
+    new_article.extended += other_article.extended
+
+    other_article.comments.each do |comment|
+      other_article.add_comment(comment)
+    end
+
+    new_article.save
+
+    return new_article
+  end
+
   protected
 
   def set_published_at

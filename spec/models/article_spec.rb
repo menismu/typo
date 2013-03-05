@@ -630,5 +630,33 @@ describe Article do
     end
 
   end
+
+  #describe "self#merge_with(other_article_id)" do
+  #  before(:all) do
+  #    @article1 = Article.create!(:title => 'Article 1', :body => 'Article 1 content', :extended => 'Article 1 extended')
+  #    @article2 = Article.create!(:title => 'Article 2', :body => 'Article 2 content', :extended => 'Article 2 extended')
+
+  #    @article1.add_comment(:author => 'Writer 1', :body => 'Article 1 comment')
+  #    @article2.add_comment(:author => 'Writer 2', :body => 'Article 2 comment')
+  #  end
+
+  #  it "Should return nil if other article does not exist" do
+  #    new_article = @article1.merge_with(123456789)
+  #    new_article.should be_nil
+  #  end
+
+  #  it "Should merge the two articles" do
+  #    new_article = @article1.merge_with(@article2.id)
+
+  #    new_article.title.should match "Article 1"
+  #    new_article.body.should match "Article 1 contentArticle 2 content"
+  #    new_article.extended.should match "Article 1 extendedArticle 2 extended"
+  #  end
+
+  #  after(:all) do
+  #    @article1.destroy
+  #    @article2.destroy
+  #  end
+  #end
 end
 

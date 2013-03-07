@@ -424,8 +424,8 @@ class Article < Content
     end
 
     new_article = self.dup
-    new_article.body += other_article.body
-    new_article.extended += other_article.extended
+    new_article.body << other_article.body
+    new_article.extended << other_article.extended
 
     other_article.comments.each do |comment|
       new_article.add_comment(comment)

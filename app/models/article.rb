@@ -428,7 +428,8 @@ class Article < Content
       new_article.body.concat(other_article.body)
     end
     unless new_article.extended.nil? && other_article.extended.nil?
-    new_article.extended.concat(other_article.extended)
+      new_article.extended.concat(other_article.extended)
+    end
 
     other_article.comments.each do |comment|
       new_article.add_comment(comment)

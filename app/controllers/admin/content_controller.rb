@@ -46,7 +46,12 @@ class Admin::ContentController < Admin::BaseController
     end
 
     @article = Article.find(params[:main_article_id])
-    @article.merge_with(params[:merge_with])
+    new_article = @article.merge_with(params[:merge_with])
+    if new_article.nil?
+      redirect_to :action => 'index'
+      flash[:error] = _("Unable to merge articles")
+      return
+    end
 
     redirect_to :action => 'index'
     flash[:notice] = _("Articles merged successfully")

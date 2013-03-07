@@ -424,9 +424,9 @@ class Article < Content
     end
 
     new_article = self.dup
-    unless new_article.body.nil? && other_article.body.nil?
-      new_article.body.concat(other_article.body)
-    end
+    #unless new_article.body.nil? && other_article.body.nil?
+    new_article.body.concat(other_article.body)
+    #end
     #unless new_article.extended.nil? && other_article.extended.nil?
     #  new_article.extended.concat(other_article.extended)
     #end

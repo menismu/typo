@@ -429,7 +429,6 @@ class Article < Content
     new_article.allow_comments = self.blog.default_allow_comments
     new_article.allow_pings = self.blog.default_allow_pings
     new_article.text_filter = self.blog.text_filter
-    new_article.old_permalink = self.permalink_url unless self.permalink.nil? or self.permalink.empty?
     new_article.published = true
     new_article.body.concat(other_article.body)
     #end

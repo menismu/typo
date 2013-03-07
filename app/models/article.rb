@@ -424,8 +424,13 @@ class Article < Content
     end
 
     #new_article = self.dup
-    new_article = self.get_or_build_article
     #unless new_article.body.nil? && other_article.body.nil?
+    new_article = Article.new
+    new_article.allow_comments = self.blog.default_allow_comments
+    new_article.allow_pings = self.blog.default_allow_pings
+    new_article.text_filter = self.blog.text_filter
+    new_article.old_permalink = self.permalink_url unless self.permalink.nil? or self.permalink.empty?
+    new_article.published = true
     new_article.body.concat(other_article.body)
     #end
     #unless new_article.extended.nil? && other_article.extended.nil?
@@ -436,7 +441,7 @@ class Article < Content
       new_article.add_comment(comment)
     end
 
-    new_article.save
+    new_article.save!
 
     return new_article
   end

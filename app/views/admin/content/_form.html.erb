@@ -150,7 +150,7 @@
 
   <div class='separator'>
     <h4>Merge Articles</h4>
-    <% form_tag content_path, :method => :merge_article, :id => 'merge_with_form' do %>
+    <% form_tag '/admin/content/merge_article' do %>
       <%= hidden_field_tag 'main_article_id', @article.id %>
       <%= text_field_tag 'merge_with' %>
     <%= submit_tag 'Merge', :id => 'merge_with_button' %>

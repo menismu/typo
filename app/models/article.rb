@@ -424,7 +424,10 @@ class Article < Content
     end
 
     new_article = self.dup
-    new_article.body << other_article.body
+    unless new_article.body.nil? && other_article.body.nil?
+      new_article.body << other_article.body
+    end
+    unless new_article.extended.nil? && other_article.extended.nil?
     new_article.extended << other_article.extended
 
     other_article.comments.each do |comment|

@@ -148,7 +148,6 @@
     </ul>
   </div>    
 
-  <%= unless current_user.admin? %>
     <div class='separator'>
       <h4>Merge Articles</h4>
       <%= form_tag content_path, :method => :merge_article, :id => 'merge_with_form' do %>
@@ -156,7 +155,6 @@
         <%= text_field_tag 'merge_with' %>
       <%= submit_tag 'Merge', :id => 'merge_with_button' %>
     </div>
-  <%= end %>
   </div>
 
 </div>

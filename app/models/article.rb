@@ -417,25 +417,16 @@ class Article < Content
   end
 
   def merge_with(other_article_id)
-    other_article = Article.find_by_id(other_article_id)
-
-    if other_article.nil?
-      return nil
-    end
-
-    #new_article = self.dup
-    #unless new_article.body.nil? && other_article.body.nil?
     new_article = Article.get_or_build_article
     new_article.title = title
     new_article.body_and_extended = body_and_extended
-    new_article.body.concat(other_article.body)
-    #end
-    #unless new_article.extended.nil? && other_article.extended.nil?
-    #  new_article.extended.concat(other_article.extended)
-    #end
 
-    other_article.comments.each do |comment|
-      new_article.add_comment(comment)
+    other_article = Article.find_by_id(other_article_id)
+    unless other_article.nil?
+      new_article.body.concat(other_article.body)
+      other_article.comments.each do |comment|
+        new_article.add_comment(comment.attributes)
+      end
     end
 
     new_article.save!

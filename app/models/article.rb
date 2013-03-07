@@ -423,7 +423,7 @@ class Article < Content
       return nil
     end
 
-    new_article = self.dup
+    new_article = Article.new(other_article.attributes.merge())
     new_article.body += other_article.body
     new_article.extended += other_article.extended
 
@@ -431,7 +431,7 @@ class Article < Content
       new_article.add_comment(comment)
     end
 
-    new_article.save!
+    new_article.save
 
     return new_article
   end

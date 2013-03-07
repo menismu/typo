@@ -428,10 +428,10 @@ class Article < Content
     new_article.extended += other_article.extended
 
     other_article.comments.each do |comment|
-      other_article.add_comment(comment)
+      new_article.add_comment(comment)
     end
 
-    new_article.save
+    new_article.save!
 
     return new_article
   end

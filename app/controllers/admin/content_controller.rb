@@ -38,8 +38,8 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge_article
-    @currentuser = User.find_by_id(session[:user_id])
-    unless @currentuser.admin?
+    currentuser = User.find_by_id(session[:user_id])
+    unless currentuser.admin?
       redirect_to :action => 'index'
       flash[:error] = _("Error, you are not allowed to perform this action")
       return

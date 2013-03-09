@@ -16,14 +16,14 @@ Feature: Categories Articles
     And I fill in "category_keywords" with "key1, key2"
     And I fill in "category_description" with "Description of the category"
     And I press "Save"
-    Then I should be on the edit category page
+    Then I should be on the new category page
     And I should see "Category Name"
     And I should see "key1, key2"
     And I should see "Description of the category"
 
   Scenario: Can cancel category creation
     Then I fill in "category_name" with "Category Name 2"
-    And I press "Cancel"
+    And I follow "Cancel"
     Then I should not see "Category Name 2"
     
   Scenario: Can edit categories
@@ -38,5 +38,6 @@ Feature: Categories Articles
 
   Scenario: Can delete categories
     When I follow "Delete"
+    And I press "delete"
     Then I should not see "Category Name"
     And I should not see "Category New Name"

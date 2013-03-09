@@ -27,22 +27,22 @@ class Admin::CategoriesController < Admin::BaseController
     @categories = Category.find(:all)
     @category = Category.find_by_id(params[:id])
 
-    if @category.nil? && !request.post?
+    if @category.nil?
       @category = Category.new
-    else
-      @category.attributes = params[:category]
-      if request.post?
-        respond_to do |format|
-          format.html { save_category }
-          format.js do 
-            @category.save
-            @article = Article.new
-            @article.categories << @category
-            return render(:partial => 'admin/content/categories')
-          end
+    end
+
+    @category.attributes = params[:category]
+    if request.post?
+      respond_to do |format|
+        format.html { save_category }
+        format.js do 
+          @category.save
+          @article = Article.new
+          @article.categories << @category
+          return render(:partial => 'admin/content/categories')
         end
-        return
       end
+      return
     end
     render 'new'
   end

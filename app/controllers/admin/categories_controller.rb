@@ -27,7 +27,9 @@ class Admin::CategoriesController < Admin::BaseController
     @categories = Category.find(:all)
     @category = Category.find_by_id(params[:id])
 
-    unless @category.nil?
+    if @category.nil?
+      @category = Category.new
+    else
       @category.attributes = params[:category]
       if request.post?
         respond_to do |format|
@@ -42,8 +44,6 @@ class Admin::CategoriesController < Admin::BaseController
         return
       end
     end
-
-    @category = Category.new
     render 'new'
   end
 

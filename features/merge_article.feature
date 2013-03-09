@@ -16,4 +16,4 @@ Feature: Merge Articles
 
   Scenario: Can merge articles as Administrator
     When I am on the edit article page
-    Then I should see "merge_with"
+    Then I should see "Merge Articles"
